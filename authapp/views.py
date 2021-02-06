@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.urls import reverse
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
-from authapp.models import User
+from basket.models import Basket
 
 
 def login(request):
@@ -55,6 +55,7 @@ def profile(request):
         form = UserProfileForm(instance=request.user)
     context = {
         'title': 'GeekShop - Профиль',
-        'form': form
+        'form': form,
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', context)

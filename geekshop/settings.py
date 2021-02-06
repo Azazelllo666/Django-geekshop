@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'mainapp',
     'authapp',
+    'basket',
 
     'django.contrib.admin',
     'django.contrib.auth',
