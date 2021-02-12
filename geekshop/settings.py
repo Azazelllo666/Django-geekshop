@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basket',
+    'adminapp',
 
     'django.contrib.admin',
     'django.contrib.auth',
