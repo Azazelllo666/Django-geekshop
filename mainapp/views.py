@@ -1,5 +1,7 @@
 import json
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from mainapp.models import ProductCategory, Product
 
 
@@ -10,18 +12,50 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def products(request, pk=None):
-    print(pk)
+# def products(request, category_id=None):
+#     with open('mainapp/fixtures/city.json', 'r', encoding='utf-8') as f:
+#         data = json.load(f)
+#         cities = []
+#         for city in data:
+#             cities.append(city['city'])
+#
+#     if category_id:
+#         products = Product.objects.filter(category_id=category_id)
+#     else:
+#         products = Product.objects.all()
+#
+#     context = {
+#         'title': 'Каталог - GeekShop',
+#         'products': products,
+#         'categories': ProductCategory.objects.all(),
+#         'cities_json': cities
+#     }
+#     return render(request, 'mainapp/products.html', context)
 
+
+def products(request, category_id=None, page=1):
     with open('mainapp/fixtures/city.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
         cities = []
         for city in data:
             cities.append(city['city'])
 
+    if category_id:
+        products = Product.objects.filter(category_id=category_id)
+    else:
+        products = Product.objects.all()
+    paginator = Paginator(products.order_by('-price'), per_page=3)
+    # products_paginator = paginator.page(page)
+    try:
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+
     context = {
         'title': 'Каталог - GeekShop',
-        'products': Product.objects.all(),
+        'products': products_paginator,
         'categories': ProductCategory.objects.all(),
         'cities_json': cities
     }
