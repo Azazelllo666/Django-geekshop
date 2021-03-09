@@ -10,7 +10,8 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             {% if messages or form.non_field_errors %}
-                                <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show" role="alert"
+                                <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show"
+                                     role="alert"
                                      style="margin-top: 50px;">
                                     {% if messages %}
                                         {% for message in messages %}
@@ -44,6 +45,13 @@
                                             <a class="small" href="#">Забыли пароль?</a>
                                             <input class="btn btn-primary" type="submit" value="Авторизоваться">
                                         </div>
+                                        <div class="card-footer text-center">
+                                            <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/"
+                                               class="btn btn-primary btn-block" role="button">
+                                                Войти через <i class="fab fa-vk"></i>
+                                            </a>
+                                        </div>
+
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
