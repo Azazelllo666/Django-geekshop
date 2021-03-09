@@ -1,12 +1,14 @@
-from django.urls import path
+from django.urls import path, re_path
 import authapp.views as authapp
+from authapp.apps import AuthappConfig
 
 
 app_name = 'authapp'
 
 urlpatterns = [
-    path('login/', authapp.login, name='login'),
-    path('register/', authapp.register, name='register'),
-    path('logout/', authapp.logout, name='logout'),
-    path('profile/', authapp.profile, name='profile'),
+    re_path(r'^login/$', authapp.login, name='login'),
+    re_path(r'^register/$', authapp.register, name='register'),
+    re_path(r'^logout/$', authapp.logout, name='logout'),
+    re_path(r'^profile/$', authapp.profile, name='profile'),
+    re_path(r'^verify/(?P<email>.+)/(?P<activation_key>\w+)/$', authapp.verify, name='verify'),
 ]

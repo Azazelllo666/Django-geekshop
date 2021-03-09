@@ -12,27 +12,6 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-# def products(request, category_id=None):
-#     with open('mainapp/fixtures/city.json', 'r', encoding='utf-8') as f:
-#         data = json.load(f)
-#         cities = []
-#         for city in data:
-#             cities.append(city['city'])
-#
-#     if category_id:
-#         products = Product.objects.filter(category_id=category_id)
-#     else:
-#         products = Product.objects.all()
-#
-#     context = {
-#         'title': 'Каталог - GeekShop',
-#         'products': products,
-#         'categories': ProductCategory.objects.all(),
-#         'cities_json': cities
-#     }
-#     return render(request, 'mainapp/products.html', context)
-
-
 def products(request, category_id=None, page=1):
     with open('mainapp/fixtures/city.json', 'r', encoding='utf-8') as f:
         data = json.load(f)

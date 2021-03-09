@@ -6,8 +6,9 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 
 from authapp.models import User
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductAdminCreateForm, ProductAdminUpdateForm
-from mainapp.models import Product
+from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductAdminCreateForm, ProductAdminUpdateForm, \
+    ProductCategoryAdminCreateForm, ProductCategoryAdminUpdateForm
+from mainapp.models import Product, ProductCategory
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/')
@@ -126,4 +127,60 @@ class ProductDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.quantity = 0
         self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ProductCategoryListView(ListView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-categories-read.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser, login_url='/'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductCategoryListView, self).dispatch(request, *args, **kwargs)
+
+
+class ProductCategoryCreateView(CreateView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-categories-create.html'
+    form_class = ProductCategoryAdminCreateForm
+    success_url = reverse_lazy('admins:admin_categories_read')
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser, login_url='/'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductCategoryCreateView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductCategoryCreateView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Добавление категории'
+        return context
+
+
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-categories-update-delete.html'
+    form_class = ProductCategoryAdminUpdateForm
+    success_url = reverse_lazy('admins:admin_categories_read')
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser, login_url='/'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductCategoryUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductCategoryUpdateView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Редактирование категории'
+        return context
+
+
+class ProductCategoryDeleteView(DeleteView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-categories-update-delete.html'
+    success_url = reverse_lazy('admins:admin_categories_read')
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser, login_url='/'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductCategoryDeleteView, self).dispatch(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
         return HttpResponseRedirect(self.get_success_url())
