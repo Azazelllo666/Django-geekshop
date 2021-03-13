@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'basket',
     'adminapp',
     'social_django',
+    'ordersapp',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +72,7 @@ TEMPLATES = [
                 'mainapp.context_processors.basket_func',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'django.template.context_processors.media',
             ],
         },
     },

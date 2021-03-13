@@ -547,6 +547,7 @@ pre code {
 .container-lg,
 .container-xl {
   width: 100%;
+  max-width: 1366px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
