@@ -20,7 +20,6 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from mainapp.views import index
 
-
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^$', index, name='index'),
@@ -29,6 +28,7 @@ urlpatterns = [
     re_path(r'^baskets/', include('basket.urls', namespace='baskets')),
     re_path(r'^admin-staff/', include('adminapp.urls', namespace='admins')),
     path("", include("social_django.urls", namespace="social")),
+    re_path(r"^order/", include("ordersapp.urls", namespace="order")),
 ]
 
 if settings.DEBUG:
