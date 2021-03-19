@@ -1,0 +1,24 @@
+[
+  {
+    "model": "authapp.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$88bN53l38lzl$n57d8T2/qYYKJxjEkWzPeuQfGxr4ptZzvknK0SDUgRI=",
+      "last_login": "2021-03-11T18:20:32.572Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "\u041f\u0435\u0442\u0440\u0443\u0445\u0430",
+      "last_name": "\u041b\u0435\u043e\u043d\u0438\u0434\u043e\u0432",
+      "email": "leonidovpi@yandex.ru",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-03-10T19:07:02.477Z",
+      "avatar": "users_avatar/68e3fea587122df836c0b7a7603b0880_cropped_308x411_7CU0CtA.jpg",
+      "age": 18,
+      "activation_key": "",
+      "activation_key_expires": "2021-03-12T19:06:54.926Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
