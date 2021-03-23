@@ -7,6 +7,7 @@ from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from basket.models import Basket
 from mainapp.models import Product
@@ -14,7 +15,7 @@ from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItem
 
 
-class OrderList(ListView):
+class OrderList(LoginRequiredMixin, ListView):
     model = Order
 
     def get_queryset(self):
