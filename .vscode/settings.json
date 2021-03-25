@@ -1,0 +1,21 @@
+{
+    "python.pythonPath": "/home/django/venv/bin/python",
+    "python.languageServer": "Pylance",
+    "python.experiments.optOutFrom": ["All"],
+    "editor.fontFamily": "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 17,
+    "terminal.integrated.fontSize": 17,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "-l 120"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/__pycache__": true,
+        "**/.vscode": true,
+    }
+}
