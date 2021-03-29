@@ -14,9 +14,9 @@ Pillow==8.1.0
 psycopg2-binary==2.8.6
 pycparser==2.20
 pydotplus==2.0.2
-pygraphviz==1.7
 PyJWT==2.0.1
 pyparsing==2.4.7
+python-memcached==1.59
 python3-openid==3.2.0
 pytz==2020.5
 requests==2.25.1
