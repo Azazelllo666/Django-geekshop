@@ -1,8 +1,9 @@
 from django.db import models
 from django.shortcuts import get_object_or_404
+from django.utils.functional import cached_property
 
-from authapp.models import User
 from mainapp.models import Product
+from authapp.models import User
 
 
 class Basket(models.Model):
@@ -18,11 +19,11 @@ class Basket(models.Model):
         return self.quantity * self.product.price
 
     def total_quantity(self):
-        baskets = Basket.objects.filter(user=self.user)
+        baskets = self.get_items_cached
         return sum(basket.quantity for basket in baskets)
 
     def total_cost(self):
-        baskets = Basket.objects.filter(user=self.user)
+        baskets = self.get_items_cached
         return sum(basket.sum() for basket in baskets)
 
     @staticmethod
@@ -32,3 +33,7 @@ class Basket(models.Model):
     @staticmethod
     def get_item(pk):
         return get_object_or_404(Basket, pk=pk)
+
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
