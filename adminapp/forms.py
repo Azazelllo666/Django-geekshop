@@ -82,9 +82,11 @@ class ProductCategoryAdminCreateForm(ModelForm):
 
 
 class ProductCategoryAdminUpdateForm(ModelForm):
+    discount = forms.IntegerField(label="скидка", required=False, min_value=0, max_value=90, initial=0)
+
     class Meta:
-        model = Product
-        fields = ('name', 'description')
+        model = ProductCategory
+        fields = ('name', 'description', 'discount')
 
     def __init__(self, *args, **kwargs):
         super(ProductCategoryAdminUpdateForm, self).__init__(*args, **kwargs)
