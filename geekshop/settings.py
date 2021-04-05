@@ -20,7 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&c+%f3ud5a*7vm8annrz=5juvpvj*(7-s1gz)ixk51_%*@t#l1'
+try:
+    with open("tmp/secrets/secret_key.json", "r") as f:
+        SK = json.load(f)
+
+    SECRET_KEY = SK["SECRET_KEY_LOCAL"]
+except Exception as exp:
+    print("Settings loading fail: %s" % (exp))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv("DJANGO_PRODUCTION", default=None) else True

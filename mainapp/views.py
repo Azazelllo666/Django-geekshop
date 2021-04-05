@@ -13,12 +13,6 @@ def index(request):
 
 
 def products(request, category_id=None, page=1):
-    with open('mainapp/fixtures/city.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        cities = []
-        for city in data:
-            cities.append(city['city'])
-
     if category_id:
         products = Product.objects.filter(category_id=category_id)
     else:
@@ -36,6 +30,5 @@ def products(request, category_id=None, page=1):
         'title': 'Каталог - GeekShop',
         'products': products_paginator,
         'categories': ProductCategory.objects.all(),
-        'cities_json': cities
     }
     return render(request, 'mainapp/products.html', context)

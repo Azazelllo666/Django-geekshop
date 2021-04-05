@@ -37,30 +37,16 @@
                     <a class="nav-link" href="{% url 'products:index' %}">Каталог <i class="fas fa-shopping-bag"></i>
                     </a>
                 </li>
-
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        {% comment %}
+                        <a class="nav-link" href="{% url 'auth:profile' %}">Корзина
+                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.first_name }}
                             <i class="fas fa-user-circle"></i>
                         </a>
-                        {% endcomment %}
-                        <div class="nav-link dropdown">
-                            <a class="dropdown-toggle" href="" data-toggle="dropdown" id="dropdownMenuButton"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                {{ user.first_name|default:'Пользователь' }}
-                                <span class="caret"></span>
-                                <i class="fas fa-user-circle"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{% url 'auth:profile' %}">{{ "профиль"|upper }}</a>
-                                <a class="dropdown-item"
-                                   href="{% url 'order:orders_list' %}">{{ "Кабинет заказов"|upper }}</a>
-
-                            </div>
-                        </div>
-
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'auth:logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
